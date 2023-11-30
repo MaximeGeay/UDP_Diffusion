@@ -322,7 +322,7 @@ void MainWindow::majIp()
 
 void MainWindow::aPropos()
 {
-    QString sText=QString("%1\nUtilisaire de diffusion de trames séries ou UDP vers UDP\n\nSources: https://github.com/MaximeGeay/UDP_Diffusion\n"
+    QString sText=QString("%1\nUtilitaire de diffusion de trames séries ou UDP vers UDP\n\nSources: https://github.com/MaximeGeay/UDP_Diffusion\n"
                           "Développé avec Qt 5.14.1\nMaxime Geay\nNovembre 2023").arg(version);
     QMessageBox::information(this,"Informations",sText);
 }
