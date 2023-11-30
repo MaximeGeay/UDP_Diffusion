@@ -7,7 +7,7 @@
 #include <QNetworkInterface>
 #include <QMessageBox>
 
-#define version "UDP_Diffusion 0.1"
+#define version "UDP_Diffusion 0.2"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -15,13 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setWindowTitle(version);
-    mUdp=new UDPData();
+    //mUdp=new UDPData();
     mSensor=new SensorDialog;
 
     QSettings settings;
     QObject::connect(ui->btn_Start,&QPushButton::clicked,this,&MainWindow::clickOnStart);
-    //QObject::connect(mUdpSBE,&UDPData::dataReceived,this,&MainWindow::readData);
-    QObject::connect(mUdp,&UDPData::errorString,this,&MainWindow::errorMsg);
+    QObject::connect(mSensor,&SensorDialog::errorString,this,&MainWindow::errorMsg);
     QObject::connect(ui->btn_Refresh,&QPushButton::clicked,this,&MainWindow::majInfo);
     QObject::connect(ui->btn_RefreshIp,&QPushButton::clicked,this,&MainWindow::majIp);
     QObject::connect(ui->btn_Connect,&QPushButton::clicked,this,&MainWindow::clickOnConnect);
@@ -256,7 +255,7 @@ void MainWindow::diffData(QString sTrame)
 {
     int nPortOut=ui->sp_PortOut->value();
     QString sIp=ui->le_IPDiff->text();
-    if(mUdp->writeData(sIp,nPortOut,sTrame))
+    if(mSensor->writeData(sIp,nPortOut,sTrame))
     {
         QSettings settings;
         settings.setValue("IpDiff",sIp);

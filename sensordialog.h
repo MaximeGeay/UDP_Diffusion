@@ -23,6 +23,7 @@ public:
     bool isConnected();
     bool sendMessage(QString sMessage);
     bool broadcastMessage(QString sMessage);
+    bool writeData(QString sIp,int nPort,QString sData);
     void initCOM(QString sPortName, QString sBaudrate, QString sParity, QString sDatabits, QString sStopbits, SensorDialog::ConnexionType typeConnec);
     void initUDPin(QString sIp,int nPortIn,SensorDialog::ConnexionType typeConnec);
 
@@ -47,7 +48,6 @@ private:
     QString mTrameEnCours;
     QString mTrameEntiere;
 
-    //void init();
     int mPortUDPin=0;
     int mPortUDPout=0;
 

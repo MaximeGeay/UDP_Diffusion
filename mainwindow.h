@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 
-#include "udpdata.h"
 #include "sensordialog.h"
 
 QT_BEGIN_NAMESPACE
@@ -31,7 +30,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    UDPData *mUdp;
     void initCOM();
     void affConnec(bool bStatus);
 

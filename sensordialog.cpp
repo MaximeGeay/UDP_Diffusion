@@ -102,7 +102,7 @@ bool SensorDialog::setConnected()
 
     if(mTypeConnexion==UDP)
     {
-        if(mUdpSocket->bind(QHostAddress(mIpIn),mPortUDPin))
+        if(mUdpSocket->bind(QHostAddress(mIpIn),mPortUDPin,QAbstractSocket::ReuseAddressHint))
         {
              emit errorString(QString("Connecté au port UDP %1").arg(mPortUDPin));
              bRes=true;
@@ -249,6 +249,23 @@ bool SensorDialog::broadcastMessage(QString sMessage)
     }
 
     return bRes;
+}
+
+bool SensorDialog::writeData(QString sIp, int nPort, QString sData)
+{
+    QByteArray datagram=sData.toLocal8Bit();
+
+    qint64 res=mUdpSocket->writeDatagram(datagram.data(), datagram.size(),QHostAddress(sIp.remove(" ")),nPort);
+    if(res==-1)
+    {
+        emit errorString("Trame non émise");
+        return false;
+    }
+    else
+    {
+        emit errorString(QString("Trame émise %1").arg(sData));
+        return true;
+    }
 }
 
 void SensorDialog::initCOM(QString sPortName, QString sBaudrate, QString sParity, QString sDatabits, QString sStopbits,SensorDialog::ConnexionType typeConnec)

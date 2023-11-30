@@ -18,13 +18,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    sensordialog.cpp \
-    udpdata.cpp
+    sensordialog.cpp
 
 HEADERS += \
     mainwindow.h \
-    sensordialog.h \
-    udpdata.h
+    sensordialog.h
 
 FORMS += \
     mainwindow.ui
