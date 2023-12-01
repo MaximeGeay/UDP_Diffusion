@@ -461,10 +461,10 @@
           </size>
          </property>
          <property name="inputMask">
-          <string>999.999.999.999</string>
+          <string/>
          </property>
          <property name="text">
-          <string>0.0.0.0</string>
+          <string/>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
