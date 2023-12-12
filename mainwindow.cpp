@@ -7,7 +7,7 @@
 #include <QNetworkInterface>
 #include <QMessageBox>
 
-#define version "UDP_Diffusion 0.3"
+#define version "UDP_Diffusion 0.4"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

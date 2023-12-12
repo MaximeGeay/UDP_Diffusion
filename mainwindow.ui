@@ -185,6 +185,9 @@
           </item>
           <item row="2" column="0">
            <widget class="QPushButton" name="btn_Refresh">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rafraichit la liste des ports séries disponibles&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Rafraichir</string>
             </property>
@@ -375,6 +378,9 @@
           </item>
           <item row="0" column="2">
            <widget class="QPushButton" name="btn_RefreshIp">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rafraichit la liste des adresses IP disponibles&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Rafraichir</string>
             </property>
@@ -399,6 +405,9 @@
        </item>
        <item row="7" column="1">
         <widget class="QPushButton" name="btn_Connect">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etablit la connexion Série ou UDP pour la réception de trames&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string>Connecter</string>
          </property>
@@ -412,6 +421,9 @@
     </item>
     <item row="3" column="0">
      <widget class="QPushButton" name="btn_Start">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diffuse les trames reçues vers l'adresse et le port de diffusion&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="text">
        <string>Diffuser</string>
       </property>

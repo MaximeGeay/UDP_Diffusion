@@ -27,7 +27,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-RC_ICONS = icon.ico
+RC_ICONS = NetCloud.ico
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
