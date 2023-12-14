@@ -22,29 +22,32 @@ private slots:
      void clickOnStart();
      void clickOnConnect();
      void errorMsg(QString sMsg);
-     void majInfo();
-     void majIp();
+     void majInfoIn();
+     void majInfoOut();
+     void majIpIn();
      void aPropos();
-     void setConnectChoice(bool bChoice);//0=serie,1=udp
+     void setInputChoice(bool bChoice);//0=serie,1=udp
+     void setOutputChoice(bool bChoice);
 
 private:
     Ui::MainWindow *ui;
 
-    void initCOM();
+    void initCOMInput();
+    void initCOMOuput();
     void affConnec(bool bStatus);
 
     void diffData(QString sTrame);
 
+    SensorDialog::SerialSettings mSerialSettingsIn;
+    SensorDialog::SerialSettings mSerialSettingsOut;
 
-    QString mPortName;
-    QString mBaudrate;
-    QString mParity;
-    QString mDatabits;
-    QString mStopbits;
     QString mIpIn;
-    SensorDialog* mSensor;
-    SensorDialog::ConnexionType mTypeConnec;
     int mPortIn=0;
+    SensorDialog* mSensorIn;
+    SensorDialog* mSensorOut;
+    SensorDialog::ConnexionType mTypeInput;
+    SensorDialog::ConnexionType mTypeOutput;
+
     bool mDiffStatus=false;
 
 };

@@ -34,55 +34,53 @@ SensorDialog::ConnexionType SensorDialog::getSensorType()
 
 bool SensorDialog::setConnected()
 {
-
-
     bool bRes=false;
     if(mTypeConnexion==Serie)
      {
-        mSeriaPort->setPortName(mPortSerie);
-        if(mBaudrate=="4800")
+        mSeriaPort->setPortName(mSerialSettings.portname);
+        if(mSerialSettings.baudrate=="4800")
             mSeriaPort->setBaudRate(QSerialPort::Baud4800);
-        if(mBaudrate=="9600")
+        if(mSerialSettings.baudrate=="9600")
             mSeriaPort->setBaudRate(QSerialPort::Baud9600);
-        if(mBaudrate=="19200")
+        if(mSerialSettings.baudrate=="19200")
             mSeriaPort->setBaudRate(QSerialPort::Baud19200);
-        if(mBaudrate=="38400")
+        if(mSerialSettings.baudrate=="38400")
             mSeriaPort->setBaudRate(QSerialPort::Baud38400);
-        if(mBaudrate=="115200")
+        if(mSerialSettings.baudrate=="115200")
             mSeriaPort->setBaudRate(QSerialPort::Baud115200);
 
-        if(mParity=="Aucune")
+        if(mSerialSettings.parity=="Aucune")
             mSeriaPort->setParity(QSerialPort::NoParity);
-        if(mParity=="Paire")
+        if(mSerialSettings.parity=="Paire")
             mSeriaPort->setParity(QSerialPort::EvenParity);
-        if(mParity=="Impaire")
+        if(mSerialSettings.parity=="Impaire")
             mSeriaPort->setParity(QSerialPort::OddParity);
-        if(mParity=="Marque")
+        if(mSerialSettings.parity=="Marque")
             mSeriaPort->setParity(QSerialPort::MarkParity);
-        if(mParity=="Espace")
+        if(mSerialSettings.parity=="Espace")
             mSeriaPort->setParity(QSerialPort::SpaceParity);
 
-        if(mDatabits=="5")
+        if(mSerialSettings.databits=="5")
             mSeriaPort->setDataBits(QSerialPort::Data5);
-        if(mDatabits=="6")
+        if(mSerialSettings.databits=="6")
             mSeriaPort->setDataBits(QSerialPort::Data6);
-        if(mDatabits=="7")
+        if(mSerialSettings.databits=="7")
             mSeriaPort->setDataBits(QSerialPort::Data7);
-        if(mDatabits=="8")
+        if(mSerialSettings.databits=="8")
             mSeriaPort->setDataBits(QSerialPort::Data8);
 
-        if(mStopbits=="1")
+        if(mSerialSettings.stopbits=="1")
             mSeriaPort->setStopBits(QSerialPort::OneStop);
-        if(mStopbits=="1.5")
+        if(mSerialSettings.stopbits=="1.5")
             mSeriaPort->setStopBits(QSerialPort::OneAndHalfStop);
-        if(mStopbits=="2")
+        if(mSerialSettings.stopbits=="2")
             mSeriaPort->setStopBits(QSerialPort::TwoStop);
 
         bRes=mSeriaPort->open(QIODevice::ReadWrite);
         if(bRes)
         {
 
-            emit errorString(QString("Connecté à %1").arg(mPortSerie));
+            emit errorString(QString("Connecté à %1").arg(mSerialSettings.portname));
             mTrameEnCours="";
         }
         else
@@ -163,7 +161,7 @@ bool SensorDialog::sendMessage(QString sMessage)
         }
         else
         {
-            emit errorString(QString("Message envoyé sur %1 : %2").arg(mPortSerie).arg(sMessage));
+            emit errorString(QString("Message envoyé sur %1 : %2").arg(mSerialSettings.portname).arg(sMessage));
             bRes=true;
         }
 
@@ -218,7 +216,7 @@ bool SensorDialog::broadcastMessage(QString sMessage)
         }
         else
         {
-            emit errorString(QString("Message envoyé sur %1 : %2").arg(mPortSerie).arg(sMessage));
+            emit errorString(QString("Message envoyé sur %1 : %2").arg(mSerialSettings.portname).arg(sMessage));
             bRes=true;
         }
 
@@ -268,13 +266,9 @@ bool SensorDialog::writeData(QString sIp, int nPort, QString sData)
     }
 }
 
-void SensorDialog::initCOM(QString sPortName, QString sBaudrate, QString sParity, QString sDatabits, QString sStopbits,SensorDialog::ConnexionType typeConnec)
+void SensorDialog::initCOM(SensorDialog::SerialSettings sSettings,SensorDialog::ConnexionType typeConnec)
 {
-    mPortSerie=sPortName;
-    mBaudrate=sBaudrate;
-    mParity=sParity;
-    mDatabits=sDatabits;
-    mStopbits=sStopbits;
+    setSerialSettings(sSettings);
     mTypeConnexion=typeConnec;
 
 }
@@ -284,6 +278,16 @@ void SensorDialog::initUDPin(QString sIp, int nPortIn, SensorDialog::ConnexionTy
     mIpIn=sIp;
     mPortUDPin=nPortIn;
     mTypeConnexion=typeConnec;
+}
+
+SensorDialog::SerialSettings SensorDialog::serialSettings()
+{
+    return mSerialSettings;
+}
+
+void SensorDialog::setSerialSettings(SensorDialog::SerialSettings sSettings)
+{
+    mSerialSettings=sSettings;
 }
 
 

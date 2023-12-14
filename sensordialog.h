@@ -13,6 +13,15 @@ public:
         Serie=0x00,UDP=0x01
     };
 
+    struct SerialSettings{
+        QString portname;
+        QString baudrate;
+        QString parity;
+        QString databits;
+        QString stopbits;
+
+    };
+
     SensorDialog();
     ~SensorDialog();
     void setSensorType(ConnexionType bType);
@@ -24,8 +33,10 @@ public:
     bool sendMessage(QString sMessage);
     bool broadcastMessage(QString sMessage);
     bool writeData(QString sIp,int nPort,QString sData);
-    void initCOM(QString sPortName, QString sBaudrate, QString sParity, QString sDatabits, QString sStopbits, SensorDialog::ConnexionType typeConnec);
+    void initCOM(SensorDialog::SerialSettings sSettings, SensorDialog::ConnexionType typeConnec);
     void initUDPin(QString sIp,int nPortIn,SensorDialog::ConnexionType typeConnec);
+    SensorDialog::SerialSettings serialSettings();
+    void setSerialSettings(SensorDialog::SerialSettings sSettings);
 
 signals:
     void dataReceived(QString);
@@ -38,11 +49,7 @@ private:
     ConnexionType mTypeConnexion;
     QSerialPort* mSeriaPort;
     QUdpSocket* mUdpSocket;
-    QString mPortSerie;
-    QString mBaudrate;
-    QString mParity;
-    QString mDatabits;
-    QString mStopbits;
+    SensorDialog::SerialSettings mSerialSettings;
     QString mIpIn;
     QString mIpOut;
     QString mTrameEnCours;
